@@ -1,3 +1,4 @@
+//Created by Jacob Marx on 2/7/19
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -13,10 +14,17 @@ class Queue {
   
  private:
   struct Node {
-    Node* head;
-    Node* tail;
+    Node() {
+      next = NULL;
+      previous = NULL;
+      data = 0;
+    }
+    Node* next;
+    Node* previous;
     int data;
-  }
+  };
+  Node* head;
+  Node* tail;
 };
 
 #endif
