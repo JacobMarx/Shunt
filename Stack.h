@@ -1,6 +1,6 @@
 //Created by Jacob Marx on 2/7/19
-#ifndef
-#define
+#ifndef STACK_H
+#define STACK_H
 
 class Stack {
  public:

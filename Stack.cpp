@@ -25,3 +25,20 @@ int Stack::push(int i) {
   }
 }
 
+int Stack::pop() {
+  Node* remove = top;
+  in value = top->data;
+  top = top->next;
+  delete remove;
+  return value;
+} 
+
+bool Stack::isempty() {
+  if(top) return false;
+  return true;
+}
+
+int Stack::peek() {
+  return top->data; 
+}
+
