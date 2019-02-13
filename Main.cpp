@@ -18,6 +18,7 @@ int main() {
 Queue* shunt(Queue* input) {
   Stack* stack = new Stack();
   Queue* output = new Queue();
+  char move;
   /*While not empty
     char token is peek
     if token is operand, enqueue
@@ -25,15 +26,42 @@ Queue* shunt(Queue* input) {
     special stuff for operators
     }
    */
-  while (input->isempty() == false) {
+  while (input->isempty() == false && stack->isempty() == false) {
     if (input->peek() >= '0' && <= '9') {
-      
+      stack->push(input->dequeue());
     }
     else {
+      //try to make more efficent
+      if (input->peek() = '+' || input->peek() == '-') {
+	if (stack->peek() == '-' || stack->peek() == '*') {
+	  output->enqueue(stack->pop());
+	  stack->push(input->dequeue());
+	}
+	if (stack->peek() == ')' || stack->isempty == true) {
+	  stack->push(input->dequeue())            ;
+	}
+	if (stack->peek() == '+' || stack->peek() == '-') {
+	  output->enqueue(stack->pop());
+	  stack->push(input->dequeue());
+	}
+	//this is good
+	if (input->peek() == ')') {
+	  while (stack->peek() != '(') {
+	    output->enqueue(stack->pop());
+	  }
+	  while (stack->peek() == '(') {
+	    delete stack->pop();
+	  }
+	}
+      }
 
     }
   }
   
+}
+
+int getpresedence(char input) {
+  if (input == '^') 
 }
 
 Queue* toInput() {
