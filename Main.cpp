@@ -8,6 +8,8 @@ using namespace std;
 Queue* shunt(Queue*);
 Queue* getInput();
 bool isOperator(char);
+int getAssociativity(char);
+int getPrecedence(char);
 
 int main() {
   Queue* input = getInput();
@@ -26,24 +28,15 @@ Queue* shunt(Queue* input) {
     special stuff for operators
     }
    */
-  while (input->isempty() == false && stack->isempty() == false) {
-    if (input->peek() >= '0' && <= '9') {
-      stack->push(input->dequeue());
+  while (stack->isempty() == false
+    || getPresedence(input->peek()) == getPresedence(stack->peek()) && getAssociativity(input->peek()) == 1
+	   && getAssociativity(stack->peek()) == 1 || getPresedence(input->peek()) < getPresedence(stack->peek()) && stack->peek != '(') {
+      output->enqueue(stack->pop());
     }
+    stack->push(input->dequeue());
     else {
       //try to make more efficent
-      if (input->peek() = '+' || input->peek() == '-') {
-	if (stack->peek() == '-' || stack->peek() == '*') {
-	  output->enqueue(stack->pop());
-	  stack->push(input->dequeue());
-	}
-	if (stack->peek() == ')' || stack->isempty == true) {
-	  stack->push(input->dequeue())            ;
-	}
-	if (stack->peek() == '+' || stack->peek() == '-') {
-	  output->enqueue(stack->pop());
-	  stack->push(input->dequeue());
-	}
+      
 	//this is good
 	if (input->peek() == ')') {
 	  while (stack->peek() != '(') {
@@ -60,8 +53,20 @@ Queue* shunt(Queue* input) {
   
 }
 
-int getpresedence(char input) {
-  if (input == '^') 
+int getPrecedence(char input) {
+  int presedence = 0;
+  if (input == '^') presedence = 4;
+  if (input == '*' || input == '/') presedence = 3;
+  if (input = '+' || input == '-') presedence = 2;
+  return presedence;
+}
+
+int getAssociativity(char input) {
+  int associativity = 0;
+  int left = 1;
+  int right = 2;
+  if (input == '^') associativity = right;
+  if (input == '*' || input == '/' || input == '+' || input == '-') associativity = left;
 }
 
 Queue* toInput() {
