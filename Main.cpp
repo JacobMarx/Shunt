@@ -7,6 +7,9 @@ using namespace std;
 
 Queue* shunt(Queue*);
 Queue* getInput();
+Node* toTree(Queue*);
+Queue* toInfix(Queue*);
+Queue* toPostfix(Queue*);
 bool isOperator(char);
 int getAssociativity(char);
 int getPrecedence(char);
@@ -30,12 +33,13 @@ Queue* shunt(Queue* input) {
    */
   while (stack->isempty() == false
     || getPresedence(input->peek()) == getPresedence(stack->peek()) && getAssociativity(input->peek()) == 1
-	   && getAssociativity(stack->peek()) == 1 || getPresedence(input->peek()) < getPresedence(stack->peek()) && stack->peek != '(') {
+	 && getAssociativity(stack->peek()) == 1 || getPresedence(input->peek()) < getPresedence(stack->peek()) && stack->peek != '(') {
       output->enqueue(stack->pop());
     }
     stack->push(input->dequeue());
-    else {
-      //try to make more efficent
+    if (input->peek() == '(') {
+      stack->push(input->dequeue());
+    }
       
 	//this is good
 	if (input->peek() == ')') {
@@ -46,10 +50,12 @@ Queue* shunt(Queue* input) {
 	    delete stack->pop();
 	  }
 	}
-      }
-
-    }
-  }
+	if (input->isempty() == true) {
+	  while (stack->isempty() == false) {
+	    output->enqueue(stack->pop());
+	  }
+	}
+	
   
 }
 
@@ -87,4 +93,16 @@ bool isOperator(char input) {
       input == '(' || input == ')') {
     return true;
   }
+}
+
+Queue* toInfix(Queue* input) {
+
+}
+
+Queue* toPrefix(Queue* input) {
+
+}
+
+Node* toTree(Queue* input) {
+  
 }
