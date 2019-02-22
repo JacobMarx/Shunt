@@ -11,18 +11,34 @@ BiTree::~BiTree() {
   //Do later too lazy
 }
 
-Node* BiTree::add(Node* m, Node* r, Node* l) {
+void BiTree::add(char* in) {
   if (head == NULL) {
-    head = m;
-    head->right == r;
-    head->left == l;
+    if (in->data == '+' || in->data == '-' || in->data == '*' || in->data == '/') {
+      head = in;
+    }
+    if (head->left == NULL) {
+      head->left == in;
+    }
+    if (head->right == NULL) {
+      head->right == in;
+    }
   }
   else {
-    
+    if (in->data == '+' || in->data == '-' || in->data == '*' || in->data == '/') {
+      Node* curr = head;
+      head == in;
+      head->left = curr;
+    }
+    else {
+      head->right = in;
+    }
   }
-  return head;
 }
 
 bool BiTree::isempty() {
 
+}
+
+char* BiTree::lmr(Node* node) {
+  
 }

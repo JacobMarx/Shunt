@@ -6,7 +6,7 @@
 using namespace std;
 
 Queue* shunt(Queue*);
-Queue* getInput();
+Queue* toInput();
 Node* toTree(Queue*);
 Queue* toInfix(Queue*);
 Queue* toPostfix(Queue*);
@@ -15,6 +15,24 @@ int getAssociativity(char);
 int getPrecedence(char);
 
 int main() {
+  bool run = true;
+  while (run == true) {
+    //do char in thingy
+    BiTree tree = new BiTree();
+    Queue* input = getInput();
+    shunt(input);
+    cout << "What do you want to convert to? (infix, postfix, or prefix)" << endl;
+    //cin stuff
+    if (strcmp(in, "infix") == 0) {
+      toinfix(BiTree); 
+    }
+    if (strcmp(in, "prefix") == 0) {
+
+    }
+    if (strcmp(in, "postfix") == 0) {
+      
+    }
+  }
   Queue* input = getInput();
   shunt(input);
   return 0;
@@ -96,13 +114,29 @@ bool isOperator(char input) {
 }
 
 Queue* toInfix(Queue* input) {
-
+   
 }
 
 Queue* toPrefix(Queue* input) {
 
 }
 
-Node* toTree(Queue* input) {
-  
+BiTree*  toTree(Queue* input, BiTree* bitree) {
+  Stack* stack = new Stack();
+  //add to stack
+  //if you are adding operator
+  //then you make three with previous two thing in stack
+  while (input->isempty() == false) {
+    if (isOperator(input->peek()) == true) {
+      stack->push(input->dequeue());
+      while (stack->isempty() == false) {
+	bitree->add(stack->pop());
+      }
+    }
+    else {
+    stack->push(input->dequeue());
+    }
+  }
+  return bitree;
+  //supposed to reuturn bitree or node?
 }

@@ -8,8 +8,12 @@ class BiTree {
   BiTree();
   ~BiTree();
 
-  Node* add(int, int, int);
-  int remove();
+  void add(char*);
+  //prob not needed
+  char* lmr(Node*);
+  char* mlr(Node*);
+  char* lrm(Node*);
+  char* remove();
   bool isempty();
   
  private:

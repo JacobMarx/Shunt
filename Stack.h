@@ -7,19 +7,21 @@ class Stack {
   Stack();
   ~Stack();
   
-  int push(int);
-  int pop();
+  void push(char*);
+  
+  char* pop();
   bool isempty();
-  int peek();
+  char* peek();
+  Node* nodeRm();
 
  private:
   struct Node {
     Node() {
       next = NULL;
-      data = 0;
+      data = NULL;
     }
     Node* next;
-    int data;
+    char* data;
   }
   Node* top;
 }

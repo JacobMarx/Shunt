@@ -13,7 +13,7 @@ Stack::~Stack() {
   //do this later too lazy
 }
 
-int Stack::push(int i) {
+void Stack::push(char* i) {
   Node* newNode = new Node();
   newNode->data = i;
   if (top == NULL) {
@@ -25,7 +25,7 @@ int Stack::push(int i) {
   }
 }
 
-int Stack::pop() {
+char* Stack::pop() {
   Node* remove = top;
   in value = top->data;
   top = top->next;
@@ -38,7 +38,13 @@ bool Stack::isempty() {
   return true;
 }
 
-int Stack::peek() {
+char* Stack::peek() {
   return top->data; 
+}
+
+Node* Stack::nodeRm() {
+  Node* remove = top;
+  top = top->next;
+  return remove;
 }
 

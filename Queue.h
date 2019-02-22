@@ -7,9 +7,10 @@ class Queue {
   Queue();
   ~Queue();
 
-  int enqueue(int);
-  int dequeue();
-  int peek();
+  void enqueue(char*);
+  
+  char* dequeue();
+  char* peek();
   bool isempty();
   
  private:
@@ -21,7 +22,7 @@ class Queue {
     }
     Node* next;
     Node* previous;
-    int data;
+    char* data;
   };
   Node* head;
   Node* tail;

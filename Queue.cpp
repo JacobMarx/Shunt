@@ -15,7 +15,7 @@ Queue::~Queue() {
   // do this i to lazy right now
 }
 
-int Queue::enqueue(int i) {
+void Queue::enqueue(char* i) {
   if (tail == NULL && head == NULL) {
     tail = new Node(i);
     head = new Node(i);
@@ -29,14 +29,14 @@ int Queue::enqueue(int i) {
   }
 }
 
-int Queue::dequeue() {
-  int value = tail->data;
+char* Queue::dequeue() {
+  char* value = tail->data;
   tail = tail->previous;
   delete tail->next;
   return value;
 }
 
-int Queue::peek() {
+char* Queue::peek() {
   return tail->data;
 }
 
@@ -44,8 +44,9 @@ bool Queue::isempty() {
   if (head) return false;
   return true;
 }
-
+/*
 int Queue::getData() {
   //return tail->data;
 }
+*/
 
