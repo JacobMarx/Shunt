@@ -12,33 +12,44 @@ BiTree::~BiTree() {
 }
 
 void BiTree::add(char* in) {
+  Node* curr = NULL;
   if (head == NULL) {
-    if (in->data == '+' || in->data == '-' || in->data == '*' || in->data == '/') {
-      head = in;
+    if (*in == '+' || *in == '-' || *in == '*' || *in  == '/') {
+      head->data = in;
     }
     if (head->left == NULL) {
-      head->left == in;
+      head->left->data == in;
     }
     if (head->right == NULL) {
-      head->right == in;
+      head->right->data == in;
     }
   }
   else {
-    if (in->data == '+' || in->data == '-' || in->data == '*' || in->data == '/') {
-      Node* curr = head;
-      head == in;
+    if (*in == '+' || *in == '-' || *in == '*' || *in == '/') {
+      curr = head;
+      head->data == in;
       head->left = curr;
     }
     else {
-      head->right = in;
+      head->right->data = in;
     }
+    curr->pre = head;
   }
 }
 
 bool BiTree::isempty() {
-
+  if (head == NULL) {
+    return true;
+  }
+  return false;
 }
 
-char* BiTree::lmr(Node* node) {
+Node* BiTree::getHead() {
+  return head;
+}
+
+/*
+Node* BiTree::getNode() {
   
 }
+*/

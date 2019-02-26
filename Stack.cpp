@@ -42,9 +42,4 @@ char* Stack::peek() {
   return top->data; 
 }
 
-Node* Stack::nodeRm() {
-  Node* remove = top;
-  top = top->next;
-  return remove;
-}
 

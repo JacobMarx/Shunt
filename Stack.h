@@ -12,7 +12,6 @@ class Stack {
   char* pop();
   bool isempty();
   char* peek();
-  Node* nodeRm();
 
  private:
   struct Node {
@@ -22,9 +21,7 @@ class Stack {
     }
     Node* next;
     char* data;
-  }
+  };
   Node* top;
-}
-
-
+};
 #endif
