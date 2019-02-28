@@ -1,12 +1,12 @@
 //Created by Jacob Marx on 2/7/19
-#incldue <iostream>
-#inlcude "Stack.h"
+#include <iostream>
+#include "Stack.h"
 
 using namespace std;
 
 Stack::Stack() {
   top = NULL;
-  data = 0;
+
 }
 
 Stack::~Stack() {
@@ -27,7 +27,7 @@ void Stack::push(char* i) {
 
 char* Stack::pop() {
   Node* remove = top;
-  in value = top->data;
+  char* value = top->data;
   top = top->next;
   delete remove;
   return value;

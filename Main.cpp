@@ -8,11 +8,11 @@
 using namespace std;
 
 Queue* shunt(Queue*);
-Queue* toInput();
+Queue* toInput(Queue*);
 BiTree* toTree(Queue*);
-Queue* toInfix(Node*, Queue*);
-Queue* toPrefix(Node*, Queue*);
-Queue* toPostfix(Node*, Queue*);
+void toInfix(Node*);
+void toPrefix(Node*);
+void toPostfix(Node*);
 bool isOperator(char);
 int getAssociativity(char*x);
 int getPrec(char*);
@@ -22,12 +22,16 @@ char* clear(char*);
 
 int main() {
   bool run = true;
+  BiTree* tree = new BiTree();
+  Queue* input = new Queue();
+  Queue* printQ = new Queue();
   while (run == true) {
     char in[8];
     clear(in);
-    BiTree* tree = new BiTree();
-    Queue* input = toInput();
-    Queue* printQ = new Queue();
+    //BiTree* tree = new BiTree();
+    //Queue* input = toInput();
+    //Queue* printQ = new Queue();
+    toInput(input);
     shunt(input);
     print(input);
     print(shunt(input));
@@ -36,23 +40,23 @@ int main() {
     cin.clear();
     cin.ignore(1000, '\n');
     if (strcmp(in, "infix") == 0) {
-      toInfix(tree->getHead(), printQ);
-      print(printQ);
-      clearQ(printQ);
+      toInfix(tree->getHead());
+      //print(printQ);
+      //clearQ(printQ);
     }
     if (strcmp(in, "prefix") == 0) {
-      toPrefix(tree->getHead(), printQ);
-      print(printQ);
-      clearQ(printQ);
+      toPrefix(tree->getHead());
+      //print(printQ);
+      //clearQ(printQ);
     }
     if (strcmp(in, "postfix") == 0) {
-      toPostfix(tree->getHead(), printQ);
-      print(printQ);
-      clearQ(printQ);
+      toPostfix(tree->getHead());
+      //print(printQ);
+      //clearQ(printQ);
     }
   }
-  Queue* input = toInput();
-  shunt(input);
+  //Queue* input = toInput();
+  //shunt(input);
   return 0;
 }
 
@@ -73,16 +77,16 @@ Queue* shunt(Queue* input) {
       output->enqueue(stack->pop());
     }
     stack->push(input->dequeue());
-    if (input->peek() == '(') {
+    if (*input->peek() == '(') {
       stack->push(input->dequeue());
     }
       
 	//this is good
-	if (input->peek() == ')') {
-	  while (stack->peek() != '(') {
+	if (*input->peek() == ')') {
+	  while (*stack->peek() != '(') {
 	    output->enqueue(stack->pop());
 	  }
-	  while (stack->peek() == '(') {
+	  while (*stack->peek() == '(') {
 	    delete stack->pop();
 	  }
 	}
@@ -111,16 +115,16 @@ int getAssociativity(char* input) {
   int associativity = 0;
   int left = 1;
   int right = 2;
-  if (input == '^') associativity = right;
-  if (input == '*' || input == '/' || input == '+' || input == '-') associativity = left;
+  if (*input == '^') associativity = right;
+  if (*input == '*' || *input == '/' || *input == '+' || *input == '-') associativity = left;
 }
 
-Queue* toInput() {
-  Queue* input = new Queue();
-  char in = 0;
-  while((in == cin.get()) != '\n') {
-    if (in >= '0' && <= '9' ||
-	isOperator(in)) {
+Queue* toInput(Queue* input) {
+  char* in = new char(0);
+  cout << "What is your equation?" << endl;
+  while((*in = cin.get()) != '\n') {
+    if (*in >= '0' && *in <= '9' ||
+	isOperator(*in)) {
       input->enqueue(in);
     }
   }
@@ -135,41 +139,41 @@ bool isOperator(char input) {
   }
 }
 
-Queue* toInfix(Node* input, Queue* out) {
+void toInfix(Node* input) {
   if (input->left != NULL) {
-    out->enqueue(print(input->left));
+    cout << input->left;
   }
-  out->enqueue(input->data);
+  cout << input;
   if (input->right != NULL) {
-    out->enqueue(print(input->right));
+    cout << input->right;
   }
-  return out;
+  //return out
 }
 
-Queue* toPostfix(Node* input, Queue* out) {
+void toPostfix(Node* input) {
   if (input->data != NULL) {
     if (input->left != NULL) {
-    out->enqueue(toPostfix(input->left));
+      cout << input->left;
     }
     if (input->right != NULL) {
-    out->enqueue(toPostfix(input->right));
+      cout << input->right;
     }
-    out->enqueue(input->data);
+    cout << input;
   }
-  return out;
+  //return out;
 }
 
-Queue* toPrefix(Node* input, Queue* out) {
+void toPrefix(Node* input) {
   if (input->data != NULL) {
-    out->enqueue(input->data);
+    cout << input;
     if (input->left != NULL) {
-      out->enqueue(toPrefix(input->left));
+      cout << input->left;
     }
     if (input->right != NULL) {
-      out->enqueue(toPrefix(input->right));
+      cout << input->right;
     }
   }
-  return out;
+  //return out;
 }
 
 BiTree* toTree(Queue* input, BiTree* bitree) {
@@ -178,7 +182,7 @@ BiTree* toTree(Queue* input, BiTree* bitree) {
   //if you are adding operator
   //then you make three with previous two thing in stack
   while (input->isempty() == false) {
-    if (isOperator(input->peek()) == true) {
+    if (isOperator(*input->peek()) == true) {
       stack->push(input->dequeue());
       while (stack->isempty() == false) {
 	bitree->add(stack->pop());
@@ -193,14 +197,14 @@ BiTree* toTree(Queue* input, BiTree* bitree) {
 }
 
 void print(Queue* in) {
-  while (in->isempty != true) {  
+  while (in->isempty() != true) {  
     cout << in->dequeue();
   }
   cout << endl;
 }
 
 Queue* clearQ(Queue* q) {
-  while (q->isempty == false) {
+  while (q->isempty() == false) {
     q->dequeue();
   }
   return q;

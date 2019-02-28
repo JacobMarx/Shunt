@@ -6,8 +6,7 @@ using namespace std;
 
 Queue::Queue() {
   tail = NULL;
-  head = NULL;
-  data = 0;
+  qhead = NULL;
   // tail->data = 5;
 }
 
@@ -16,16 +15,18 @@ Queue::~Queue() {
 }
 
 void Queue::enqueue(char* i) {
-  if (tail == NULL && head == NULL) {
-    tail = new Node(i);
-    head = new Node(i);
+  if (tail == NULL && qhead == NULL) {
+    tail = new Node();
+    tail->data = i;
+    qhead = new Node();
+    qhead->data = i;
   }
   else {
     Node* newNode = new Node();
     newNode->data = i;
-    newNode->next = head;
-    head->previous = newNode;
-    head = newNode;
+    newNode->next = qhead;
+    qhead->previous = newNode;
+    qhead = newNode;
   }
 }
 
@@ -41,7 +42,7 @@ char* Queue::peek() {
 }
 
 bool Queue::isempty() {
-  if (head) return false;
+  if (qhead) return false;
   return true;
 }
 /*

@@ -24,7 +24,7 @@ class Queue {
     Node* previous;
     char* data;
   };
-  Node* head;
+  Node* qhead;
   Node* tail;
 };
 

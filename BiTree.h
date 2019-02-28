@@ -14,7 +14,7 @@ struct Node {
   Node* pre;
   char* data;
 };
-Node* head;
+//Node* head;
   
 class BiTree {
 
@@ -28,7 +28,7 @@ class BiTree {
   Node* getHead();
   
  private:
-  //Node* head;
+  Node* head;
 };
 
 #endif
