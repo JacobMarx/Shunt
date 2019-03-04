@@ -13,13 +13,16 @@ Stack::~Stack() {
   //do this later too lazy
 }
 
+
+
 void Stack::push(char* i) {
-  Node* newNode = new Node();
-  newNode->data = i;
   if (top == NULL) {
-    top = newNode;
+    top = new Node();
+    top->data = i;
   }
   else {
+    Node* newNode = new Node();
+    newNode->data = i;
     newNode->next = top;
     top = newNode;
   }
@@ -39,6 +42,9 @@ bool Stack::isempty() {
 }
 
 char* Stack::peek() {
+  if (top == NULL) {
+    return 0;
+  }
   return top->data; 
 }
 
