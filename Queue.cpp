@@ -18,8 +18,7 @@ void Queue::enqueue(char* i) {
   if (tail == NULL && qhead == NULL) {
     tail = new Node();
     tail->data = i;
-    qhead = new Node();
-    qhead->data = i;
+    qhead = tail;
   }
   else {
     Node* newNode = new Node();
@@ -31,10 +30,22 @@ void Queue::enqueue(char* i) {
 }
 
 char* Queue::dequeue() {
-  char* value = tail->data;
-  tail = tail->previous;
-  delete tail->next;
-  return value;
+  if (tail == qhead) {
+    char* value = tail->data;
+    tail = NULL;
+    qhead = NULL;
+    return value;
+  }
+  if (tail != NULL) {
+    char* value = tail->data;
+    tail = tail->previous;
+    if (tail->next != NULL) {
+      cout << "not null" << endl;
+    }
+    delete tail->next;
+    return value;
+  }
+  return 0;
 }
 
 char* Queue::peek() {
